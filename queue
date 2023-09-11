@@ -1,0 +1,208 @@
+#include <iostream>
+
+#include <limits>
+using namespace std;
+
+template <typename t>
+ class priority_queue
+{
+    public:
+     t A[100];
+    int q_start;
+    int q_end;
+
+    priority_queue ( int value) //конструктор
+{
+      q_start=q_end=value;
+      for (int i=0;i<100;i++)
+        A[i]=value;
+
+}
+
+void push(){
+    t n;
+    cout<<"введите значение элемента:"<<endl;
+            cin >> n;
+            while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>n;
+}
+        A[q_end] = n;
+        q_end++;
+        prioritet ();
+    }
+
+void pop(){
+           if (q_start==q_end)
+    {cout<<"очередь пуста"<<endl;
+
+    }
+
+   else     {t a = A[q_start];
+        q_start++;
+      //  cout<"q_start"<<q_start<<endl;
+        return ;}
+    }
+
+void front(){
+           if (q_start==q_end)
+    {cout<<"очередь пуста"<<endl;
+    return;
+    }
+
+    else  {//cout<"q_start"<<q_start<<endl;
+    cout<<"первый элемент="<<A[q_start]<<endl;  return ;}
+    }
+
+void vvivod()
+{
+    if (q_start==q_end)
+    {cout<<"очередь пуста"<<endl;
+    return;
+    }
+    else{ //cout<"q_start"<<q_start<<endl;
+
+    for( int i=q_start; i<q_end; i++)
+        cout << A[i] << "\t";
+
+    cout <<endl;}
+}
+
+
+
+void size(){
+           if (q_start==q_end)
+    {cout<<"очередь пуста"<<endl;
+    return;
+    }
+  else
+  {cout<<"размер очереди="<<q_end - q_start<<" элемента(ов)"<<endl;
+        return ;}
+    }
+
+void clear(){
+
+
+     if (q_start==q_end)
+    {cout<<"очередь пуста"<<endl;
+    return;
+    }
+  else{
+        q_end = 0;
+        q_start = 0;
+        return ;}
+    }
+
+
+void prioritet ()
+{
+   if (((q_end-q_start)==1)||((q_end-q_start)==0))
+    return;
+
+    int up=q_end-1,low=q_start,k1=0,i;
+   t last,tmb;
+
+
+    while (low<up){
+            last=-1;//несущ индекс
+        for ( i=low;i<up;i++)
+        {
+            if (A[i]>A[i+1])
+            {
+               tmb=A[i];
+               A[i]=A[i+1];
+               A[i+1]=tmb;
+
+           last=i; }
+        }
+        up=last;
+
+
+        last= q_end;
+        for(i=up-1;i>=low;i--)
+        {
+            if (A[i]>A[i+1])
+            {
+                tmb=A[i];
+               A[i]=A[i+1];
+               A[i+1]=tmb;
+               last=i;}
+
+        }
+
+        low=last+1;
+        }
+        return;}
+
+          ~priority_queue (){ }
+
+};
+int main() {
+
+   priority_queue <float> q(0);
+
+
+setlocale (LC_ALL,"RUS");
+
+    bool f=true;
+    while(f){
+
+ cout<<"\tВозможности:"<<endl<<"1-добавить элемент в очередь"<<endl<<"2-удалить элемент из очереди (первый элемент)"<<endl<<
+ "3-первый элемент очереди"<<endl<<"4-размер очереди"<<endl<<"5-очистка всей очереди"<<endl<<"6-вывод очереди"<<endl<<"0-Выход"<<endl;
+    int b;
+    cin>>b;
+            while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректный ввод, попробуйте еще раз"<<endl;
+cin>>b;
+}
+
+
+
+
+switch (b){
+case 1:
+       {
+
+            q.push();
+           break;
+       }
+
+  case 2:
+        {    q.pop();
+        break;
+        }
+
+ case 3:
+       {
+         q.front() ;
+break;}
+
+case 4:{
+ q.size() ;
+
+ break;
+}
+case 5:{
+ q.clear();
+
+ break;
+}
+
+case 6:{
+q.vvivod();
+
+ break;
+}
+
+
+case 0:f=false;break;
+    default: cout<<"некорректный ввод, попробуйте еще раз"<<endl;
+    } }
+
+
+    return 0;
+}
