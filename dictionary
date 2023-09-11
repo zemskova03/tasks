@@ -1,0 +1,698 @@
+
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <conio.h>
+
+using namespace std;
+struct polya
+{
+    string usword;
+    string conword;
+    int weight;
+
+};
+string convert (string vvo)
+{
+    int k=0;
+for (int i=0;i<vvo.size();i++)
+    k++;
+int up=k-1,low=0,k1=0,i;
+    int last,tmb;
+
+
+
+
+     for (  i = 0; i < k; i++)
+        if (vvo[0] == vvo[i])
+            k1++;
+
+
+    while (low<up){
+            last=-1;//несущ индекс
+        for ( i=low;i<up;i++)
+        {
+            if (vvo[i]>vvo[i+1])
+            {
+               tmb=vvo[i];
+               vvo[i]=vvo[i+1];
+               vvo[i+1]=tmb;
+
+           last=i; }
+        }
+        up=last;
+
+
+        last= k;
+        for(i=up-1;i>=low;i--)
+        {
+            if (vvo[i]>vvo[i+1])
+            {
+                tmb=vvo[i];
+               vvo[i]=vvo[i+1];
+               vvo[i+1]=tmb;
+               last=i;}
+
+        }
+
+        low=last+1;
+        }
+
+
+return vvo;
+}
+
+void perenos(polya mas[])
+{
+mas[0].usword="time";
+mas[0].conword=convert (mas[0].usword);
+mas[0].weight=10;
+
+int j=4;
+mas[1].usword="person";
+mas[1].conword=convert (mas[1].usword);
+mas[1].weight=10;
+
+
+mas[2].usword="year";
+mas[2].conword=convert (mas[2].usword);
+mas[2].weight=10;
+
+
+mas[3].usword="way";
+mas[3].conword=convert (mas[3].usword);
+mas[3].weight=10;
+
+
+mas[4].usword="day";
+mas[4].conword=convert (mas[4].usword);
+mas[4].weight=10;
+
+
+mas[5].usword="thing";
+mas[5].conword=convert (mas[5].usword);
+mas[5].weight=10;
+
+
+ j=6;
+mas[j].usword="man";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="world";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="life";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="hand";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="part";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="child";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="eye";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="woman";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="place";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="work";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+
+mas[j].usword="week";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="case";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="government";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="company";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="number";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="group";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="problem";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="fact";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="verbs";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="be";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="have";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="do";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="say";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="get";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="make";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="go";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="know";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="take";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="see";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="come";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+
+mas[j].usword="think";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="look";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="want";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="give";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="use";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="find";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="tell";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="ask";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="work";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="seem";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="feel";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="try";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="leave";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="call";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="good";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="new";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="first";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="last";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="long";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="great";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="little";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="own";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="other";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="old";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="right";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="big";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="high";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="different";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="small";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="large";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="next";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="early";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="young";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="important";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="few";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="public";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="bad";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="same";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+
+mas[j].usword="able";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="to";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="of";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="in";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="for";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="on";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="with";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="at";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="by";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="from";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="up";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="about";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="into";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="over";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="after";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="beneath";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="under";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+
+mas[j].usword="above";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="the";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="and";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="a";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="that";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="i";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="it";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="not";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="he";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="as";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="you";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="this";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="but";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="his";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="they";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="her";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="she";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="or";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+
+mas[j].usword="an";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="will";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="my";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="one";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="all";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="would";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="there";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="their";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="alert";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=5;
+j++;
+mas[j].usword="alter";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=6;
+j++;
+mas[j].usword="later";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="arts";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=5;
+j++;
+mas[j].usword="rats";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=6;
+j++;
+
+mas[j].usword="star";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="tars";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=1;
+j++;
+mas[j].usword="dare";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=7;
+j++;
+mas[j].usword="dear";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=8;
+j++;
+mas[j].usword="read";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="book";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="can";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="drawer";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=5;
+j++;
+mas[j].usword="redraw";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="reward";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=7;
+j++;
+mas[j].usword="warder";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=3;
+j++;
+mas[j].usword="warred";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=2;
+j++;
+mas[j].usword="please";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="bye";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="friend";
+mas[j].conword=convert (mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="here";
+mas[j].conword=convert(mas[j].usword);
+mas[j].weight=10;
+j++;
+mas[j].usword="elvis";
+mas[j].conword=convert(mas[j].usword);
+mas[j].weight=4;
+j++;
+mas[j].usword="lives";
+mas[j].conword=convert(mas[j].usword);
+mas[j].weight=10;
+//cout<<j;
+}
+
+int main(){
+setlocale(LC_ALL,"RUS");
+
+polya mas[140];
+string vvod,vvo="p";
+
+cout<<"Введите слово (работаем только на английском языке)"<<endl;
+
+ getline (cin,vvo);
+
+ int c=0,m=0;
+
+ for(int i=0; i<sizeof(vvo)-1; i++)
+if(vvo[i]>='A' && vvo[i]<='Z') vvo[i]+='z'-'Z';
+
+if (vvo.size()==1)
+{cout<<"Вы ввели всего одну букву"<<endl;return 1;}
+
+
+
+
+for(int i=0; i<vvo.size(); i++)
+    if (vvo[0]==vvo[i])c++;
+
+if (c==vvo.size())
+    {cout<<"все буквы одинаковые"<<endl;return 1;}
+c=0;
+ vvod=convert (vvo);
+perenos(mas);
+
+for (int i=0;i<140;i++)
+    if (vvod==mas[i].conword) c++;
+
+if (c==0)
+{cout<<"такого слова не существует в словаре"<<endl;return 1;}
+int u=0;
+
+for (int i=0;i<140;i++)
+ if (vvod==mas[i].conword)
+    u=mas[i].weight;
+
+for (int i=0;i<140;i++)
+ if ((vvod==mas[i].conword)&&(u<mas[i].weight))
+    u=mas[i].weight;
+
+for (int i=0;i<140;i++)
+ if ((vvod==mas[i].conword)&&(u==mas[i].weight))
+    vvod=mas[i].usword;
+
+
+cout<<"Получилось:"<<endl;
+ cout<<vvod;
+
+
+
+return 0;
+}
