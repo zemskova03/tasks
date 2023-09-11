@@ -1,0 +1,326 @@
+#include <iostream>
+#include <string>
+#include <limits>
+using namespace std;
+void otd (int month,int year,string q, string y1){
+int m,y,v;
+string z;
+string Listofmonths[12] = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+int maxDays [12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+string daysofweek[7] ={"Пн","Вт","Ср","Чт","Пт","Сб","Вс"};
+
+int d,i,p,j;
+int current;
+y=year;
+m=month;
+if (m == 1 || m == 2) {
+		m += 12;
+		y--;
+	}
+ current = (1 + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7;//день недели 1 числа месяца
+
+
+
+i=month-1;
+if( month==2 )//для февраля проверяем год текущий високосный год
+if (year % 4 == 0)//каждый год,делящийся на 4-високосный
+d = 29;
+else
+d = maxDays[i];
+else
+d = maxDays[i];
+
+if (q=="ev")
+cout<<endl<<"-----------"<<Listofmonths[i]<<" "<<year<<"-------------"<<endl;
+else cout<<endl<<"----------"<<Listofmonths[i]<<"------------"<<endl;
+
+if (y1=="horiz"){
+for(p=0;p<7;p++)
+cout<<daysofweek[p]<<" ";
+cout<<endl;
+
+int k;
+
+for (k = 0; k < current; k++) // до позиции 1 числа заполяем нулями
+cout<<"   ";
+
+k=current;
+for (int j = 1; j <= d; j++)//заполняем числами
+{
+    if (j<=9)//для форматирование (числа до 9 занимают одну позицию, поэтому нужно дополнительный пробел добавить)
+cout<<j<<"  ";
+else cout<<j<<" ";
+
+k++;
+if (k > 6) //неделя кончилась, переходим на след строку
+{
+k = 0;
+cout<<endl;
+}
+} cout<<endl;
+}
+else {
+
+  if (current==0){   //все дальше идет для того чтобы получить вертикальный вывод
+for (p = 0; p < 7; p++) {
+
+	cout << daysofweek[p] << "  ";
+
+
+ j=p+1;
+	for (; j <= d; j +=7) {
+                    if (j<=9) cout<< j<<"   ";
+     else cout << j<<"  ";
+			} cout<<endl;
+			} return ;}
+
+
+int f=7-current+1;
+v=2;
+for (p = 0; p < 7; p++) {
+
+if (current>p)
+{
+	cout << daysofweek[p] << "  ";
+    cout<<"    ";
+
+ j=f;
+	for (; j <= d; j +=7)
+                    if (j<=9) cout<< j<<"   ";
+     else cout << j<<"  ";
+ cout<<endl;f++;
+}
+
+ if   (current==p)
+ { j=1;
+cout << daysofweek[p] << "  ";
+
+
+	for (; j <= d; j +=7)
+                    if (j<=9) cout<< j<<"   ";
+     else cout << j<<"  ";cout<<endl;}
+
+
+if (current<p)
+    {
+cout << daysofweek[p] << "  ";
+
+    for ( j=v; j <= d; j +=7)
+                    if (j<=9) cout<< j<<"   ";
+     else cout << j<<"  ";v++;cout<<endl;}
+
+     }
+}
+
+}
+
+int main()
+{
+   setlocale(LC_ALL,"rus");
+int z,month,year,w;
+int t,n,m,i;
+string q,y1;
+    bool l=true,o=true;
+    while (l)
+    {
+        cout<<endl<<"Календарь:"<<endl<<"1-вывод календаря для заданного месяца"<<endl<<"2-вывод календаря для заданного года"<<endl<<
+        "3-вывод календаря для заданного диапазона месяцев"<<endl<<"0-выход"<<endl;
+        cin>>z;
+           while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>z;
+}
+        switch(z)
+        {
+
+        case 1:
+        {
+           cout<<"Введите номер месяца: ";
+cin>>month;
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>month;
+}
+
+if ((month!=1)&&(month!=2)&&(month!=3)&&(month!=4)&&(month!=5)&&(month!=6)&&(month!=7)&&(month!=8)&&(month!=9)&&(month!=10)&&(month!=11)&&(month!=12))
+{ cout<<"неверное значение месяца"<<endl; break;
+}
+
+cout<<"Введите номер года: ";
+cin>>year;
+
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>year;
+}
+if (year<=0)
+{cout<<"некорректный год"<<endl;break;}
+
+o=true;
+while (o){
+    cout<<"введите формат ввода (vert-вертикальный, horiz-горизонтальный)"<<endl;
+cin>>y1;
+if ((y1=="vert")||(y1=="horiz")) o=false;
+else
+cout<<"несуществующий формат"<<endl;
+}
+
+q="on";
+cout<<endl<<"\t"<<year;
+otd(month,year,q,y1);
+            break;
+        }
+        case 2:
+        {
+
+cout<<"введите год"<<endl;
+cin>>year;
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>year;
+}
+
+if (year<=0)
+{cout<<"некорректный год"<<endl;break;}
+
+o=true;
+while (o){
+    cout<<"введите формат ввода (vert-вертикальный, horiz-горизонтальный)"<<endl;
+cin>>y1;
+if ((y1=="vert")||(y1=="horiz")) o=false;
+else
+cout<<"несуществующий формат"<<endl;
+}
+
+o=true;
+while (o){
+    cout<<"введите формат вывода(on-вывод года один раз, ev-для каждого месяца)"<<endl;
+cin>>q;
+if ((q=="on")||(q=="ev")) o=false;
+else
+cout<<"несуществующий формат"<<endl;
+}
+if (q=="on")
+    cout<<endl<<"\t"<<year;
+otd (1,year,q,y1);cout<<"\t";otd(2,year,q,y1);cout<<"\t";otd(3,year,q,y1);cout<<"\t";otd(4,year,q,y1);cout<<endl;
+otd (5,year,q,y1);cout<<"\t";otd(6,year,q,y1);cout<<"\t";otd(7,year,q,y1);cout<<"\t";otd(8,year,q,y1);cout<<endl;
+otd (9,year,q,y1);cout<<"\t";otd(10,year,q,y1);cout<<"\t";otd(11,year,q,y1);cout<<"\t";otd(12,year,q,y1);cout<<endl;
+
+            break;
+        }
+        case 3:
+        {
+            int year1,year2,month1,month2;
+            bool k=true;
+
+cout<<"введите диапазон:"<<endl;
+cout<<"введите номер месяца 1 года"<<endl;
+cin>>month1;
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>month1;
+}
+
+cout<<"введите 1 год"<<endl;
+cin>>year1;
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>year1;
+}
+cout<<"введите номер месяца 2 года"<<endl;
+cin>>month2;
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>month2;
+}
+
+
+cout<<"введите 2 год"<<endl;
+cin>>year2;
+   while (!cin.good())
+{ cin.clear();
+cin.ignore((numeric_limits<streamsize>::max()), '\n');
+cout<<"Некорректное значение, попробуйте еще раз"<<endl;
+cin>>year2;
+}
+
+if ((year2<year1)||(year1<=0)||(year2<=0)||(month1<=0)||(month1>12)||(month2>12)||(month2<=0)||((year1==year2)&&(month1>month2)))
+{cout<<"неправильный диапазон"<<endl;return 0;}
+
+o=true;
+while (o){
+    cout<<"введите формат ввода (vert-вертикальный, horiz-горизонтальный)"<<endl;
+cin>>y1;
+if ((y1=="vert")||(y1=="horiz")) o=false;
+else
+cout<<"несуществующий формат"<<endl;
+}
+
+o=true;
+while (o){
+    cout<<"введите формат вывода(on-вывод года один раз, ev-для каждого месяца)"<<endl;
+cin>>q;
+if ((q=="on")||(q=="ev")) o=false;
+else
+cout<<"несуществующий формат"<<endl;
+}
+
+n=month1;
+m=month2;
+
+
+
+if (year1==year2)
+{
+    if (q=="on")
+    cout<<endl<<"\t"<<year1;
+
+   for (i=month1;i<=month2;i++)
+    otd(i,year1,q,y1);return 0;
+}
+
+for (t=year1;t<=year2;t++)
+{
+    if (t==year2)
+
+      { if (q=="on")
+    cout<<endl<<"\t"<<year2;
+
+          for (i=1;i<=m;i++)
+        otd(i,t,q,y1);return 0;}
+
+        if (q=="on")
+    cout<<endl<<"\t"<<year1;
+
+
+  for (;n<=12;n++)
+      otd(n,t,q,y1);
+
+ n=1;
+}break;}
+        case 0:
+        {
+            l=false;
+            break;
+        }
+        default :
+            cout<<"некорректный ввод, попробуйте еще раз"<<endl;
+        }
+    }
+
+    return 0;
+}
