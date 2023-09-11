@@ -1,0 +1,91 @@
+#include <iostream>
+#include <string>
+#include<limits>
+using namespace std;
+
+struct FIO
+{
+string firstname;
+string midname;
+string lastname;
+};
+
+class mainFIO
+{public:
+FIO fio;
+int k=0;
+ FIO mas[20];
+};
+
+
+class Salary
+{
+float hours;
+public:
+
+void result()
+
+{cout<<"Введите кол-во отработанных часов"<<endl;
+cin>>hours;
+
+
+
+float m;
+m=hours*10;
+cout<<"Зарплата за "<<hours<<" часов="<<m<<"\n"<<endl;
+
+ return;
+}
+};
+class data:public Salary,public mainFIO
+{
+    public:
+void ADD()
+{
+
+cout<<"Введите инициалы сотрудника"<<endl;
+cout<<"Имя"<<endl;
+cin>>fio.firstname;
+cout<<"Отчество"<<endl;
+cin>>fio.midname;
+cout<<"Фамилия"<<endl;
+cin>>fio.lastname;
+mas[k]=fio;
+k++;
+}
+void print ()
+{if (k==0) {cout<<"сотрудники отсутствуют\n"<<endl;return;}
+    cout<<"Выведем инициалы сотрудников:\n"<<endl;
+for (int i=0;i<k;i++)
+    {cout<<"Имя:"<<mas[i].firstname<<endl;
+    cout<<"Отчество:"<<mas[i].midname<<endl;
+    cout<<"Фамилия:"<<mas[i].lastname<<"\n"<<endl;
+    result();
+    }
+}
+};
+
+int main()
+{
+    data m;
+
+
+    setlocale(LC_ALL,"rus");
+    int y=0;bool f=true;
+    while (f){
+cout<<"Возможности:\n"<<"1-добавлять сотрудника"<<endl<<"2-просмотр списка сотрудников"<<endl<<"0-выход\n"<<endl;
+cin>>y;
+
+
+switch(y)
+{
+case 1:{m.ADD();break;}
+case 2:{m.print();break;}
+case 0:{break;f=false;}
+default:{cout<<"некорректный ввод"<<endl;break;}
+}
+
+}
+
+    return 0;
+}
