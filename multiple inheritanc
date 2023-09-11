@@ -1,0 +1,573 @@
+#include <iostream>
+#include <iterator>
+#include <list>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+string checknumber(string number) {
+    int j = 0;
+    bool checknum = false;
+    do {
+        do {
+            checknum = false;
+            if (number[j] < 0x0030 || number[j]>0x0039) { //проверка чтобы не было ничего кроме чисел
+                checknum = true;
+                cout << "Incorrect input. Try again.";
+                getline(cin, number, '\n');
+                j = 0;
+            }
+        } while (checknum == true);
+        j++;
+    } while (j < number.size());
+    return number;
+}
+
+class Sotrudnik {
+    string Name;
+    string Patronymic;
+    string Surname;
+    int Salary;
+public:
+    Sotrudnik() {};
+    Sotrudnik(int value1, string value2) {
+        Name = value2;
+        Patronymic = value2;
+        Surname = value2;
+        Salary = value1;
+    };
+
+    void Set_Name(string A) {//для ввода имени с клавиатуры на длину, на символы. Не должно быть ничего кроме заглавных и строчных букв латиницы
+        int i = 0;
+
+        bool checks = false;
+        do {
+            do {
+                checks = false;
+
+                if (!((A[i] >= 0x0041 && A[i] <= 0x005A) || (A[i] >= 0x0061 && A[i] <= 0x007A)) || !(A.length() < 15))
+                {
+                    cout << "Incorrect input. Try again.";
+                    checks = true; cin.clear();
+                    getline(cin, A, '\n');
+                    i = 0;
+                }
+            } while (checks == true);
+            i++;
+        } while (i < A.size());
+        Name = A;
+
+    }
+
+    string Get_Name() {
+        return Name;
+    }
+    void Set_Patronymic(string B) {//для ввода отчества с клавиатуры на длину, на символы. Не должно быть ничего кроме заглавных и строчных букв латиницы
+        int i = 0;
+        bool checks = false;
+        do {
+            do {
+                checks = false;
+                if (!((B[i] >= 0x0041 && B[i] <= 0x005A) || (B[i] >= 0x0061 && B[i] <= 0x007A)) || !(B.length() < 15))
+                {
+                    cout << "Incorrect input. Try again.";
+                    checks = true; cin.clear();
+                    getline(cin, B, '\n');
+                    i = 0;
+                }
+            } while (checks == true);
+            i++;
+        } while (i < B.size());
+        Patronymic = B;
+    }
+    string Get_Patronymic() {
+        return Patronymic;
+    }
+    void Set_Surname(string C) { //для ввода фамилии с клавиатуры на длину, на символы. Не должно быть ничего кроме заглавных и строчных букв латиницы
+        int i = 0;
+        bool checks = false;
+        do {
+            do {
+                checks = false;
+                if (!((C[i] >= 0x0041 && C[i] <= 0x005A) || (C[i] >= 0x0061 && C[i] <= 0x007A)) || !(C.length() < 15))
+                {
+                    cout << "Incorrect input. Try again.";
+                    checks = true; cin.clear();
+                    getline(cin, C, '\n');
+                    i = 0;
+                }
+            } while (checks == true);
+            i++;
+        } while (i < C.size());
+        Surname = C;
+    }
+
+    string Get_Surname() {
+        return Surname;
+    }
+
+    friend void operator << (ostream& output, Sotrudnik& item);
+
+};
+void operator << (ostream& output, Sotrudnik& item)
+{
+    output << item.Name;
+    output << item.Surname;
+    output << item.Patronymic;
+
+}
+
+
+
+class Buhgalter : public Sotrudnik {
+    int S_Salary;
+    string stavka;
+
+public:
+    Buhgalter() {};
+    Buhgalter(int value1, string value2) : Sotrudnik(value1, value2)
+    {
+        stavka = value2;
+        S_Salary = value1;
+    };
+
+    void Set_stavka(string D) {
+        stavka = checknumber(D);
+
+    }
+    string Get_stavka() {
+        return stavka;
+    }
+    int Salary(string stavka) {
+
+        int stavka1 = stoi(stavka);
+        if (stavka1 == 0)  throw out_of_range("зарплата не может равняться 0. Try again!");
+        S_Salary = stavka1 * 8 * 5;
+        return (S_Salary);
+    }
+    void Display() {
+        cout << "сотрудник: " << Get_Name() << " " << Get_Patronymic() << " " << Get_Surname() << endl;
+        cout << "зарплата в неделю: " << S_Salary << endl;
+        cout << "__________________________________________" << endl;
+    }
+};
+
+class Programer : public Sotrudnik {
+    const string Level[4] = { "junior", "middle", "senior", "lead" };
+    list <string> Qualities;
+
+public:
+    Programer() {};
+    Programer(int value1, string value2, list <string> value3) : Sotrudnik(value1, value2) {
+        list<string> Qualities = value3;
+    };
+
+    string Set_Level() {
+        char ch = 'n';
+        cout << "Какой уровень у данного программиста ";
+        cout << "Выберите уровень: 1-junior, 2-middle, 3-senior, 4-lead " << endl;
+        ch = getchar(); cin.ignore(10000, '\n');
+        do {
+            switch (ch) {
+            case '1': return Level[0];  break;
+            case '2': return Level[1];  break;
+            case '3': return Level[2];  break;
+            case '4': return Level[3];  break;
+            case 'e': break;
+            default: cout << "такой команды не существует ";
+                cout << "Repeat input! "; ch = getchar(); cin.ignore(10000, '\n');
+            }
+        } while (ch != 'e');
+    }
+    void Show_Level() {
+        cout << "это уровень программиста: " << Set_Level();
+    }
+
+    list <string> Technologies() {
+        list <string> tech; int k1, k2, k3, k4, k5;
+        k1 = 0; k2 = 0; k3 = 0; k4 = 0; k5 = 0;
+        char t = 'n';
+        cout << "возможные технологии:" << endl << " 1-C++, 2-Java, 3-Swift, 4-Python, 5-Delphi, e-выйти" << endl;
+        do {
+            t = getchar(); cin.ignore(10000, '\n');
+            switch (t) {
+            case '1': {if (k1 == 0) { tech.push_back("C++"); cout << "добавлено!" << endl; k1++; }
+                    else { cout << "вы уже добавили C++" << endl; break; }
+            } break;
+
+            case '2': {if (k2 == 0) { tech.push_back("Java"); cout << "добавлено!" << endl; k2++; }
+                    else { cout << "вы уже добавили Java" << endl; break; }
+            }break;
+            case '3': { if (k3 == 0) { tech.push_back("Swift"); cout << "добавлено!" << endl; k3++; }
+                    else { cout << "вы уже добавили Swift" << endl; break; }
+            }break;
+            case '4': { if (k4 == 0) {
+                tech.push_back("Python"); cout << "добавлено!" << endl; k4++;
+            }
+                    else { cout << "вы уже добавили Python" << endl; break; }
+            }break;
+            case '5': { if (k5 == 0) {
+                tech.push_back("Delphi"); cout << "добавлено!" << endl; k5++;
+            }
+                    else { cout << "вы уже добавили Delphi" << endl; break; }
+            }break;
+            case 'e': break;
+            }
+        } while (t != 'e');
+        return tech;
+    }
+
+    void Show_Technologies(list <string> tech) {
+        for (list <string>::iterator ttr = tech.begin(); ttr != tech.end(); ++ttr) {
+            cout << *ttr << " ";
+        }
+
+    }
+};
+
+class Secretary : public Sotrudnik {
+public:
+    //Secretary();
+    void List_of_Sotrudnik(vector <Sotrudnik> amount) {
+        if (amount.size() == 0) { cout << "пусто.\n"; return; }
+
+        for (int i = 0; i < amount.size(); i++) {
+            cout << "имя          " << amount[i].Get_Name() << endl;
+            cout << "фамилия       " << amount[i].Get_Surname() << endl;
+            cout << "отчество    " << amount[i].Get_Patronymic() << endl;
+            cout << "______________________________" << endl;
+        }
+        return;
+    }
+
+    void Array_of_Programers(Programer array[], int c) {
+        if (c == 0) { cout << "пусто."; return; }
+        for (int i = 0; i < c; i++) {
+            cout << "имя          " << array[i].Get_Name() << endl;
+            cout << "фамилия      " << array[i].Get_Surname() << endl;
+            cout << "отчество   " << array[i].Get_Patronymic() << endl;
+            cout << "______________________________" << endl;
+        }
+    }
+};
+
+class Director : public Sotrudnik {
+public:
+    Director() {};
+    Director(int value1, string value2, Sotrudnik value3) : Sotrudnik(value1, value2) {
+        Sotrudnik Field = value3;
+    };
+
+    vector <Sotrudnik> AddEmployee() {
+        vector <Sotrudnik> Employees;
+        string name, surname, patronymic; int em;
+        cout << "сколько сотрудников вы хотите добавить?";
+        cin >> em;
+        cin.ignore(10000, '\n');
+        for (int i = 0; i < em; i++) {
+            Sotrudnik k;
+
+            cout << endl << "введите имя нового сотрудника ";
+            getline(cin, name);
+            k.Set_Name(name);
+            cout << "введите имя нового сотрудника ";
+            getline(cin, patronymic);
+            k.Set_Patronymic(patronymic);
+            cout << "введите имя нового сотрудника";
+            getline(cin, surname);
+            k.Set_Surname(surname);
+            Employees.push_back(k);
+        }
+        return Employees;
+    }
+
+    void DelEmployee(vector <Sotrudnik>& Employees) {
+        cout << "сотрудники: " << endl;
+        for (int i = 0; i < Employees.size(); i++) {
+            cout << i + 1 << " ";
+            cout << Employees[i].Get_Name() << " ";
+            cout << Employees[i].Get_Patronymic() << " ";
+            cout << Employees[i].Get_Surname() << " ";
+            cout << endl << "_______________________________" << endl;
+        }
+
+        cout << "выберете какого сотрудника вы хотите удалить: ";
+        int del; cin >> del; cin.ignore(10000, '\n');
+
+        Employees.erase(Employees.begin() + del - 1);
+        cout << "-новые сотрудники- " << endl << "сотрудник: " << endl;
+        for (int i = 0; i < Employees.size(); i++)
+        {
+            cout << "No" << i + 1 << " ";
+            cout << Employees[i].Get_Name() << " ";
+            cout << Employees[i].Get_Patronymic() << " ";
+            cout << Employees[i].Get_Surname() << " ";
+            cout << endl << "_______________________________" << endl;
+        }
+    }
+};
+
+int main()
+{
+    setlocale (LC_ALL,"RUS");
+    try {
+        cout << "Выберете директора: 1-1 директор, 2-2 директор," << endl;
+        int ch_director = 9;
+        cin >> ch_director;
+
+        if ((ch_director == 1) || (ch_director == 2)) cout << endl;
+        else { cout << "неправильно. вы должны выбрать между  1 and 2."; return 1; }
+
+        switch (ch_director) {
+        case 1: {
+            list <Buhgalter> list_of_buhgalter; Director Dir1;  int n = 0; const int NMax = 10;
+            vector <Sotrudnik> vector_of_emp; Programer programers[NMax]; list <string> list_of_technologies;
+
+            Secretary secretary1;
+            cin.ignore(10000, '\n');
+            cout <<"введите имя секретаря ";
+            string sec1_name, sec1_surname, sec1_patronymic;
+            getline(cin, sec1_name);
+            secretary1.Set_Name(sec1_name);
+            cout << "введите отчество секретаря ";
+            getline(cin, sec1_patronymic);
+            secretary1.Set_Patronymic(sec1_patronymic);
+            cout << "введите фамилию секретаря ";
+            getline(cin, sec1_surname);
+            secretary1.Set_Surname(sec1_surname);
+
+            int nb = 0; string name, surname, patronymic;
+            cout << "введите кол-во бухгалтеров [0,5]?";
+            string buh;
+            getline(cin, buh);
+            nb = stoi(buh);
+            if (nb < 0 || nb>5) throw out_of_range("кол-во бухгалтеров вышло за диапазон [0,5]");
+            if (nb == 0) {
+                Buhgalter b;
+                cout << "Секретарь: Директор, Вы не имеете ни одного бухгалтера. Вам необходимо нанять хотя бы одного." << endl;
+                vector_of_emp = Dir1.AddEmployee();
+                cout << endl << "введите ставку в час=";
+                string st;
+                getline(cin, st);
+                b.Set_stavka(st);
+                int zarplata = 0;
+                zarplata = b.Salary(b.Get_stavka());
+                cout << "зарплата в неделю" << zarplata << endl;
+            }
+            else {
+                for (int i = 1; i <= nb; i++) {
+                    Buhgalter b;
+                    cout << endl << "Бухгалтер No" << i << endl;
+                    cout << "введите имя бухгалтера ";
+                    getline(cin, name);
+                    b.Set_Name(name);
+
+                    cout << "введите отчество бухгалтера ";
+                    getline(cin, patronymic);
+                    b.Set_Patronymic(patronymic);
+
+                    cout << "введите фамилию бухгалтера ";
+                    getline(cin, surname);
+                    b.Set_Surname(surname);
+                    list_of_buhgalter.push_back(b);
+                }
+                string st, hr; int stavka, hours; Buhgalter b;
+                cout << "ставка в час=";
+                getline(cin, st);
+                b.Set_stavka(st);
+                for (list <Buhgalter>::iterator ptr = list_of_buhgalter.begin(); ptr != list_of_buhgalter.end(); ptr++) {
+                    ptr->Salary(b.Get_stavka());
+                    ptr->Display();
+                }
+            }
+
+
+
+            cout << endl << "введите кол-во программистов в компании [1,10]: ";
+            string pro;
+            getline(cin, pro);
+
+            n = stoi(pro); if (n < 1 || n>11) throw out_of_range("вышлоа за диапазон [1,10]");
+
+            for (int i = 0; i < n; i++) {
+                Programer programer1;
+
+                cout << endl << "Программист No" << i + 1 << endl;
+                cout << "введите имя программиста ";
+                getline(cin, name);
+                programer1.Set_Name(name); programers[i].Set_Name(programer1.Get_Name());
+                cout << "введите отчество программиста ";
+                getline(cin, patronymic);
+                programer1.Set_Patronymic(patronymic); programers[i].Set_Patronymic(programer1.Get_Patronymic());
+                cout << "введите фамилию программиста ";
+                getline(cin, surname);
+                programer1.Set_Surname(surname); programers[i].Set_Surname(programer1.Get_Surname());
+                programer1.Show_Level(); cout << endl;
+                list_of_technologies = programer1.Technologies();
+                cout << "программист No" << i + 1 << " имеет эти технологии : ";
+                programer1.Show_Technologies(list_of_technologies);
+                cout << endl;
+
+            }
+
+            cout << "\nсписок программистов в компании\n";
+            cout << endl;
+            for (int i = 0; i < n; i++)
+            {
+                cout << "имя          " << programers[i].Get_Name() << endl;
+                cout << "фамилия       " << programers[i].Get_Surname() << endl;
+                cout << "отчество   " << programers[i].Get_Patronymic() << endl;
+                cout << "______________________________" << endl;
+            }
+
+            cout << "\nсписок программистов в компании\n";
+            cout << endl;
+            for (int i = 0; i < n; i++)
+            {
+                cout << "имя       " << programers[i].Get_Name() << endl;
+                cout << "фамилия       " << programers[i].Get_Surname() << endl;
+                cout << "отчество    " << programers[i].Get_Patronymic() << endl;
+                cout << "______________________________" << endl;
+
+            }
+
+            cout << endl << "список сотрудников\n" << endl;
+            secretary1.List_of_Sotrudnik(vector_of_emp);
+            secretary1.Array_of_Programers(programers, n);
+            for (list <Buhgalter>::iterator ptr = list_of_buhgalter.begin(); ptr != list_of_buhgalter.end(); ptr++) {
+                cout << "имя          " << ptr->Get_Name() << endl; //
+                cout << "фамилия       " << ptr->Get_Surname() << endl;
+                cout << "отчество   " << ptr->Get_Patronymic() << endl;
+                cout << "______________________________" << endl;
+            }
+            cout << "имя         " << secretary1.Get_Name() << endl;
+            cout << "фамилия      " << secretary1.Get_Patronymic() << endl;
+            cout << "отчество   " << secretary1.Get_Surname() << endl;
+            cout << "______________________________" << endl;
+
+        }break;
+        case 2: {
+            list <Buhgalter> list_of_buhgalter2; Director Dir2;  int n2 = 0; const int NMax2 = 10;
+            vector <Sotrudnik> vector_of_emp2; Programer programers2[NMax2]; list <string> list_of_technologies2;
+
+            Secretary secretary2;
+            cin.ignore(10000, '\n');
+            cout << "введите имя секретаря ";
+            string sec2_name, sec2_surname, sec2_patronymic;
+            getline(cin, sec2_name);
+            secretary2.Set_Name(sec2_name);
+            cout << "введите отчество секретаря ";
+            getline(cin, sec2_patronymic);
+            secretary2.Set_Patronymic(sec2_patronymic);
+            cout << "введите фамилию секретаря ";
+            getline(cin, sec2_surname);
+            secretary2.Set_Surname(sec2_surname);
+
+            int nb2 = 0; string name2, surname2, patronymic2;
+            cout << "секретарь: введите кол-во бухгалтеров [0,5)?";
+            string buh2;
+            getline(cin, buh2);
+            nb2 = stoi(buh2);
+            if (nb2 < 0 || nb2>5) throw out_of_range("кол-во бухгалтеров вышло за диапазон [0,5)");
+            if (nb2 == 0) {
+                Buhgalter b2;
+                cout << "секретарь: директор, Вы не имеет ни одного бухгалтера. Вам необходим нанять хоть одного." << endl;
+                vector_of_emp2 = Dir2.AddEmployee();
+                cout << endl << "ставка в час=";
+                string st2;
+                getline(cin, st2);
+                b2.Set_stavka(st2);
+                int zarplata2 = 0;
+                zarplata2 = b2.Salary(b2.Get_stavka());
+                cout << "зарплата в неделю " << zarplata2 << endl;
+            }
+            else {
+                for (int i = 1; i <= nb2; i++) {
+                    Buhgalter b2;
+                    cout << endl << "бухгалтер No" << i << endl;
+                    cout << "введите имя бухгалтера ";
+                    getline(cin, name2);
+                    b2.Set_Name(name2);
+
+                    cout << "введите отчество бухгалтера ";
+                    getline(cin, patronymic2);
+                    b2.Set_Patronymic(patronymic2);
+
+                    cout << "введите фамилию бухгалтера ";
+                    getline(cin, surname2);
+                    b2.Set_Surname(surname2);
+                    list_of_buhgalter2.push_back(b2);
+                }
+                string st2, hr2; int stavka2, hours2; Buhgalter b2;
+                cout << "ставка в час=";
+                getline(cin, st2);
+                b2.Set_stavka(st2);
+                for (list <Buhgalter>::iterator ptr2 = list_of_buhgalter2.begin(); ptr2 != list_of_buhgalter2.end(); ptr2++) {
+                    ptr2->Salary(b2.Get_stavka());
+                    ptr2->Display();
+                }
+            }
+
+
+
+            cout << endl << "введите кол-во программистов в компании (0,10): ";
+            string pro2;
+            getline(cin, pro2);
+
+            n2 = stoi(pro2); if (n2 < 0 || n2>10) throw out_of_range("кол-во программистов вышло за диапазон (0,10)");
+
+            for (int i = 0; i < n2; i++) {
+                Programer programer2;
+
+                cout << endl << "программист No" << i + 1 << endl;
+                cout << "введите имя программиста ";
+                getline(cin, name2);
+                programer2.Set_Name(name2); programers2[i].Set_Name(programer2.Get_Name());
+                cout << "введите отчество программиста ";
+                getline(cin, patronymic2);
+                programer2.Set_Patronymic(patronymic2); programers2[i].Set_Patronymic(programer2.Get_Patronymic());
+                cout << "введите фамилию программиста ";
+                getline(cin, surname2);
+                programer2.Set_Surname(surname2); programers2[i].Set_Surname(programer2.Get_Surname());
+                programer2.Show_Level(); cout << endl;
+                list_of_technologies2 = programer2.Technologies();
+                cout << "программист No" << i + 1 << " имеет эти технологии : ";
+                programer2.Show_Technologies(list_of_technologies2);
+                cout << endl;
+            }
+
+            cout << "\nсписок программистов в компании\n";
+            cout << endl;
+            for (int i = 0; i < n2; i++)
+            {
+                cout << "имя          " << programers2[i].Get_Name() << endl;
+                cout << "фамилия      " << programers2[i].Get_Surname() << endl;
+                cout << "отчество    " << programers2[i].Get_Patronymic() << endl;
+                cout << "______________________________" << endl;
+            }
+
+            cout << endl << "список сотрудников в компании\n" << endl;
+            secretary2.List_of_Sotrudnik(vector_of_emp2);
+            secretary2.Array_of_Programers(programers2, n2);
+            for (list <Buhgalter>::iterator ptr2 = list_of_buhgalter2.begin(); ptr2 != list_of_buhgalter2.end(); ptr2++) {
+                cout << "имя          " << ptr2->Get_Name() << endl;
+                cout << "фамилия      " << ptr2->Get_Surname() << endl;
+                cout << "отчество    " << ptr2->Get_Patronymic() << endl;
+                cout << "______________________________" << endl;
+            }
+            cout << "имя          " << secretary2.Get_Name() << endl;
+            cout << "фамилия      " << secretary2.Get_Patronymic() << endl;
+            cout << "отчество   " << secretary2.Get_Surname() << endl;
+
+        }break;
+
+        }
+
+    }
+    catch (const exception& e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
+}
